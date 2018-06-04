@@ -16,7 +16,7 @@ const getPagePerfMetrics = require('./mhe-c2pqa-pages');
   
   
   console.log('start). test moodle teacher open asset')
-  console.log('------------------------------------------')
+  console.log('------------------------------------------\n')
   console.log('1). launch connect2-pqa')
   console.log( await getPagePerfMetrics(page, 'http://moodle-pqa.integration.nonprod.mheducation.com/'));
   
@@ -45,14 +45,13 @@ const getPagePerfMetrics = require('./mhe-c2pqa-pages');
   
   
   await page.waitFor(2*1000);
-  await page.screenshot({path: 'end.png', fullPage: true});
+  await page.screenshot({path: 'moodle-teacher-oepn-asset.png', fullPage: true});
   
+ 
   
   browser.close();
+  console.log('\n-----------------------')
   console.log('end). test is done')
 
 }) ()
 
-
-
-// #element1 > div.rightrowcontent > div.toprightrowcontent > span   

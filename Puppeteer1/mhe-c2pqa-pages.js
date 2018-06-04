@@ -8,6 +8,7 @@ async function getPagePerfMetrics( page, urlString ) {
 		// console.log('goto url')
 		await page.goto(urlString);
 		
+		await page.waitFor(2*1000);
 		
 		const performanceTiming = JSON.parse(
 		    await page.evaluate(() => JSON.stringify(window.performance.timing))
