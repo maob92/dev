@@ -25,10 +25,19 @@ async function getPagePerfMetrics( page, urlString ) {
 		
 	}
 	else {
-		// console.log('click on selector');
+
+
 		await page.waitForSelector(urlString);
-		await page.click(urlString);
 		
+		await page.waitFor(2*1000);
+		const start = new Date().getTime();
+	
+		await page.click(urlString);
+
+		const PageLoadTime = new Date().getTime() - start;
+		return 'PageLoadTime: ' + PageLoadTime;
+		
+
 	}
 	
 
