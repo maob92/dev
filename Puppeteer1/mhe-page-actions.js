@@ -6,7 +6,7 @@ async function getPagePerfMetrics( page, urlString ) {
 	
 	if (urlString.includes('http')) {
 		// console.log('goto url')
-		await page.goto(urlString);
+		await page.goto(urlString, {'waitUntil' : 'networkidle2'});
 		
 		await page.waitFor(2*1000);
 		
@@ -27,18 +27,20 @@ async function getPagePerfMetrics( page, urlString ) {
 	}
 	else {
 
-
 		await page.waitForSelector(urlString);
 		
 		await page.waitFor(2*1000);
 		const start = new Date().getTime();
-	
-		await page.click(urlString);
+
+		// click on the selector 
+		// await page.click(urlString, {'waitUntil' : 'networkidle2'});
+		
+		await Promise.all([page.click(urlString, {'waitUntil' : 'networkidle2'})]);
+		
 
 		const PageLoadTime = new Date().getTime() - start;
 		return 'PageLoadTime: ' + PageLoadTime;
 		
-
 	}
 	
 
@@ -46,9 +48,6 @@ async function getPagePerfMetrics( page, urlString ) {
 }
 
 
-async function getPagePerfMetrics1( page, urlString ) {
-	console.log('testing page: ' + urlString);
-}
 
 module.exports = getPagePerfMetrics;
 
